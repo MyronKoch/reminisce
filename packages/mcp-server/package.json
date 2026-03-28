@@ -1,0 +1,63 @@
+{
+  "name": "@reminisce/mcp-server",
+  "version": "0.2.0",
+  "description": "MCP server for Reminisce - AI memory that thinks like a human brain",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "reminisce-mcp": "dist/index.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "bun test",
+    "lint": "tsc --noEmit",
+    "start": "node dist/index.js",
+    "dev": "bun run src/index.ts"
+  },
+  "dependencies": {
+    "@reminisce/orchestrator": "^0.2.0",
+    "@reminisce/core": "^0.2.0",
+    "@reminisce/storage-sqlite": "^0.2.0",
+    "@reminisce/episodic": "^0.2.0",
+    "@reminisce/semantic": "^0.2.0",
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.3.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "license": "MIT",
+  "keywords": [
+    "reminisce",
+    "mcp",
+    "memory",
+    "ai",
+    "claude",
+    "anthropic"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MyronKoch/reminisce.git",
+    "directory": "packages/mcp-server"
+  },
+  "homepage": "https://github.com/MyronKoch/reminisce#readme",
+  "bugs": {
+    "url": "https://github.com/MyronKoch/reminisce/issues"
+  }
+}

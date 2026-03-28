@@ -1,0 +1,46 @@
+{
+  "name": "@reminisce/cloudflare",
+  "version": "0.2.0",
+  "description": "Reminisce Cloudflare Workers deployment with D1, Vectorize, and Workers AI",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./worker": {
+      "types": "./dist/worker.d.ts",
+      "import": "./dist/worker.js"
+    }
+  },
+  "files": [
+    "dist",
+    "wrangler.toml.example"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "build:dashboard": "cd ../dashboard && bun run build && mkdir -p ../cloudflare/public/dashboard && cp -r dist/* ../cloudflare/public/dashboard/",
+    "build:deploy": "bun run build:dashboard && bun run build",
+    "dev": "wrangler dev",
+    "deploy": "bun run build:deploy && wrangler deploy",
+    "test": "bun test",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@reminisce/core": "^0.2.0",
+    "@reminisce/orchestrator": "^0.2.0",
+    "@reminisce/api": "^0.2.0",
+    "hono": "^4.0.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240512.0",
+    "typescript": "^5.3.0",
+    "wrangler": "^4.0.0"
+  },
+  "peerDependencies": {
+    "wrangler": ">=4.0.0"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,50 @@
+{
+  "name": "@reminisce/cli",
+  "version": "0.2.0",
+  "description": "CLI for initializing and managing Reminisce memory systems",
+  "type": "module",
+  "bin": {
+    "reminisce": "./dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "bun test",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@reminisce/storage-sqlite": "^0.2.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.3.0"
+  },
+  "license": "MIT",
+  "keywords": [
+    "reminisce",
+    "cli",
+    "memory",
+    "ai",
+    "init"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MyronKoch/reminisce.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://github.com/MyronKoch/reminisce#readme",
+  "bugs": {
+    "url": "https://github.com/MyronKoch/reminisce/issues"
+  }
+}

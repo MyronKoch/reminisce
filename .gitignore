@@ -1,0 +1,30 @@
+node_modules/
+dist/
+.env
+.env.*
+*.log
+.DS_Store
+.turbo
+coverage/
+*.local
+.specstory/
+.cursorindexingignore
+
+# Cloudflare Worker
+packages/cloudflare/public/
+packages/cloudflare/.wrangler/
+wrangler.toml
+
+# Local config (use .example files as templates)
+.npmrc
+**/.npmrc
+
+# Verdaccio local storage
+.verdaccio/storage/
+
+# PAI / personal config
+.claude/
+
+# SQLite databases
+*.db
+*.sqlite

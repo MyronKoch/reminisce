@@ -1,0 +1,105 @@
+# Reminisce Cloudflare Workers Configuration
+#
+# Copy this file to wrangler.toml and fill in your values.
+# Then run: wrangler deploy
+#
+# Prerequisites:
+# 1. Create a D1 database: wrangler d1 create reminisce
+# 2. (Optional) Create a Vectorize index: wrangler vectorize create reminisce-vectors --dimensions 768
+# 3. (Optional) Enable Workers AI in your account
+
+name = "reminisce-api"
+main = "dist/worker.js"
+compatibility_date = "2024-01-01"
+
+# Account ID (from Cloudflare dashboard)
+# account_id = "your-account-id"
+
+# ─────────────────────────────────────────────────────────────
+# D1 Database (Required)
+# ─────────────────────────────────────────────────────────────
+# Create with: wrangler d1 create reminisce
+# Then copy the database_id from the output
+
+[[d1_databases]]
+binding = "DB"
+database_name = "reminisce"
+database_id = "your-d1-database-id"
+
+# ─────────────────────────────────────────────────────────────
+# Workers AI (Optional - for free embeddings and chat)
+# ─────────────────────────────────────────────────────────────
+# No setup needed, just uncomment to enable
+
+[ai]
+binding = "AI"
+
+# ─────────────────────────────────────────────────────────────
+# Vectorize (Optional - for vector search)
+# ─────────────────────────────────────────────────────────────
+# Create with: wrangler vectorize create reminisce-vectors --dimensions 768 --metric cosine
+# Then copy the index_name
+
+# [[vectorize]]
+# binding = "VECTORIZE"
+# index_name = "reminisce-vectors"
+
+# ─────────────────────────────────────────────────────────────
+# KV Namespace (Optional - for rate limiting cache)
+# ─────────────────────────────────────────────────────────────
+# Create with: wrangler kv:namespace create REMINISCE_KV
+
+# [[kv_namespaces]]
+# binding = "KV"
+# id = "your-kv-namespace-id"
+
+# ─────────────────────────────────────────────────────────────
+# Environment Variables
+# ─────────────────────────────────────────────────────────────
+
+[vars]
+# Comma-separated list of allowed CORS origins
+CORS_ORIGINS = "*"
+
+# Set to "true" to allow unauthenticated requests (dev only!)
+ALLOW_ANONYMOUS = "false"
+
+# ─────────────────────────────────────────────────────────────
+# Secrets (set via wrangler secret put)
+# ─────────────────────────────────────────────────────────────
+# Run: wrangler secret put JWT_SECRET
+# Then enter a secure random string
+
+# JWT_SECRET = (set via wrangler secret put)
+
+# ─────────────────────────────────────────────────────────────
+# Production Environment
+# ─────────────────────────────────────────────────────────────
+
+[env.production]
+# Override settings for production
+# workers_dev = false
+# route = { pattern = "api.yourdomain.com/*", zone_name = "yourdomain.com" }
+
+[env.production.vars]
+CORS_ORIGINS = "https://yourdomain.com,https://dashboard.yourdomain.com"
+ALLOW_ANONYMOUS = "false"
+
+# ─────────────────────────────────────────────────────────────
+# Development Environment
+# ─────────────────────────────────────────────────────────────
+
+[env.dev]
+# Local development settings
+workers_dev = true
+
+[env.dev.vars]
+CORS_ORIGINS = "*"
+ALLOW_ANONYMOUS = "true"
+
+# ─────────────────────────────────────────────────────────────
+# Observability
+# ─────────────────────────────────────────────────────────────
+
+# [observability]
+# enabled = true

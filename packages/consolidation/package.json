@@ -1,0 +1,49 @@
+{
+  "name": "@reminisce/consolidation",
+  "version": "0.2.0",
+  "description": "Memory consolidation - episodic to semantic fact extraction",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "bun test",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@reminisce/core": "^0.2.0",
+    "@reminisce/episodic": "^0.2.0",
+    "@reminisce/semantic": "^0.2.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.3.0"
+  },
+  "license": "MIT",
+  "keywords": [
+    "reminisce",
+    "memory",
+    "ai",
+    "consolidation",
+    "cognitive"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MyronKoch/reminisce.git",
+    "directory": "packages/consolidation"
+  },
+  "homepage": "https://github.com/MyronKoch/reminisce#readme",
+  "bugs": {
+    "url": "https://github.com/MyronKoch/reminisce/issues"
+  }
+}

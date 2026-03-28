@@ -1,0 +1,48 @@
+{
+  "name": "reminisce",
+  "version": "0.2.0",
+  "description": "AI memory that thinks like a human brain - cognitive science-inspired memory architecture",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo build",
+    "test": "turbo test",
+    "lint": "turbo lint",
+    "dev": "turbo dev",
+    "publish:npm": "bun run scripts/publish-npm.ts",
+    "publish:npm:dry": "bun run scripts/publish-npm.ts --dry-run",
+    "registry:start": "docker compose up -d",
+    "registry:stop": "docker compose down",
+    "registry:logs": "docker compose logs -f",
+    "publish:local": "./scripts/publish-local.sh",
+    "unpublish:local": "./scripts/unpublish-local.sh"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "typescript": "^5.3.0"
+  },
+  "packageManager": "bun@1.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MyronKoch/reminisce.git"
+  },
+  "homepage": "https://github.com/MyronKoch/reminisce#readme",
+  "bugs": {
+    "url": "https://github.com/MyronKoch/reminisce/issues"
+  },
+  "author": "Myron Koch",
+  "keywords": [
+    "ai",
+    "memory",
+    "llm",
+    "mcp",
+    "cognitive-science",
+    "episodic-memory",
+    "semantic-memory",
+    "working-memory",
+    "claude",
+    "anthropic"
+  ]
+}
