@@ -22,7 +22,7 @@ wrangler.toml
 # Verdaccio local storage
 .verdaccio/storage/
 
-# PAI / personal config
+# Personal config
 .claude/
 
 # SQLite databases

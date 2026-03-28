@@ -55,7 +55,7 @@ export interface InitResult {
  * Initialize a new Reminisce database
  */
 export async function init(options: InitOptions): Promise<InitResult> {
-  const { path, enableVector = false, dimensions = 1536 } = options;
+  const { path, enableVector = false, dimensions = 768 } = options;
 
   // Create directory if it doesn't exist
   const dir = dirname(path);

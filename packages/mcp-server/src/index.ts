@@ -246,10 +246,16 @@ server.tool(
       const results = await reminisce.search(query);
 
       // Augment semantic results with vector search when available
+      // Build a map of memory_id -> similarity score from vector hits
+      const vectorScores = new Map<string, number>();
       if (text && enableVector && vectorDb) {
         const queryEmbedding = await embedText(text);
         if (queryEmbedding) {
           const vectorHits = searchSemanticByVector(vectorDb, queryEmbedding, limit ?? 10);
+          // Store similarity scores (cosine distance -> similarity: 1 - distance)
+          for (const hit of vectorHits) {
+            vectorScores.set(hit.memory_id, Math.max(0, 1 - hit.distance));
+          }
           // Collect IDs already in LIKE results
           const existingIds = new Set(results.semantic.map((s: SemanticMemory) => s.memory_id.id));
           // Hydrate vector-found facts not already in LIKE results
@@ -257,7 +263,6 @@ server.tool(
             .map(h => h.memory_id)
             .filter(id => !existingIds.has(id));
           if (missingIds.length > 0) {
-            // Query the DB directly to hydrate vector-found facts
             for (const id of missingIds) {
               const row = vectorDb.prepare<
                 { id: string; fact: string; subject: string | null; predicate: string | null; object: string | null; category: string | null; salience_json: string; provenance_json: string },
@@ -267,7 +272,6 @@ server.tool(
                 const salience = JSON.parse(row.salience_json);
                 const provenance = JSON.parse(row.provenance_json);
                 if (!provenance.retracted) {
-                  // Build a minimal SemanticMemory-compatible object for output mapping
                   results.semantic.push({
                     memory_id: { id: row.id, layer: 'semantic' },
                     content: {
@@ -289,6 +293,26 @@ server.tool(
       }
 
       const totalResults = results.working.length + results.episodic.length + results.semantic.length;
+
+      // Map semantic results with real relevance scores and sort by relevance
+      const semanticOutput = results.semantic.map((s: SemanticMemory) => {
+        const vectorSim = vectorScores.get(s.memory_id.id);
+        // Use vector similarity if available, otherwise fall back to a low default for LIKE-only matches
+        const relevance = vectorSim ?? (text ? 0.1 : s.salience.current_score);
+        return {
+          id: s.memory_id.id,
+          layer: 'semantic' as const,
+          fact: s.content.fact,
+          subject: s.content.subject,
+          predicate: s.content.predicate,
+          object: s.content.object,
+          category: s.content.category,
+          relevance,
+          salience: s.salience.current_score,
+          confidence: s.provenance.confidence,
+          retracted: s.provenance.retracted ?? false,
+        };
+      }).sort((a, b) => b.relevance - a.relevance);
 
       return {
         content: [
@@ -314,18 +338,7 @@ server.tool(
                 sessionId: e.session_id,
                 consolidated: e.consolidated,
               })),
-              semantic: results.semantic.map((s: SemanticMemory) => ({
-                id: s.memory_id.id,
-                layer: 'semantic',
-                fact: s.content.fact,
-                subject: s.content.subject,
-                predicate: s.content.predicate,
-                object: s.content.object,
-                category: s.content.category,
-                salience: s.salience.current_score,
-                confidence: s.provenance.confidence,
-                retracted: s.provenance.retracted ?? false,
-              })),
+              semantic: semanticOutput,
             }),
           },
         ],

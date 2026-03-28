@@ -4,7 +4,7 @@
 
 ## TL;DR
 
-You're building a **productizable memory framework** for AI systems. The MVP is complete with **252 tests passing**. SQLite persistence is working. MCP server is integrated. **Ready for npm publish.**
+You're building a **productizable memory framework** for AI systems. The MVP is complete with **606 tests passing**. SQLite persistence is working. MCP server is integrated. **Ready for npm publish.**
 
 ---
 
@@ -30,8 +30,6 @@ reminisce/
 │   ├── cloudflare/      ✅ Cloudflare Workers deployment
 │   ├── cli/             ✅ CLI initialization
 │   └── reminisce/            ✅ Unified re-export package
-├── docs/
-│   └── COGNITIVE_SCIENCE.md   # Neuroscience research background
 ├── ARCHITECTURE.md            # Comprehensive design doc (READ THIS FIRST)
 ├── README.md                  # Project overview with Quick Start
 ├── turbo.json                 # Build configuration
@@ -138,7 +136,7 @@ The `packages/mcp-server/` package exposes Reminisce via MCP protocol with SQLit
 | `REMINISCE_DB_PATH` | SQLite database path | (in-memory) |
 | `REMINISCE_MACHINE_ID` | Machine identifier | `reminisce-mcp` |
 | `REMINISCE_VECTOR` | Enable vector search | `false` |
-| `REMINISCE_DIMENSIONS` | Embedding dimensions | `1536` |
+| `REMINISCE_DIMENSIONS` | Embedding dimensions | `768` |
 
 **Implemented Tools:**
 - `remember` - Add to working memory
@@ -216,7 +214,6 @@ if (value !== undefined) obj.optional = value;
 1. `ARCHITECTURE.md` - Full design, all APIs documented
 2. `packages/orchestrator/src/reminisce.ts` - Main entry point
 3. `packages/core/src/types/` - All type definitions
-4. `docs/COGNITIVE_SCIENCE.md` - Why it's designed this way
 
 ---
 
@@ -250,7 +247,7 @@ Progress:
 - [x] MCP server uses SQLite when REMINISCE_DB_PATH is set
 - [x] SQLite backend persists data across sessions
 - [x] README has working Quick Start
-- [x] All tests pass (252 tests)
+- [x] All tests pass (606 tests)
 - [x] Unified `@reminisce/reminisce` package created
 - [x] All packages have npm metadata
 - [x] Local registry testing (Verdaccio)

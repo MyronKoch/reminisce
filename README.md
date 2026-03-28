@@ -42,7 +42,7 @@ Current AI memory solutions (Mem0, Zep, etc.) treat memory as a monolithic vecto
 ### Key Features
 
 - **Cloud-native** — D1 (SQLite-compatible) + Vectorize (768-dim vector search) + Workers AI embeddings
-- **Multi-machine** — M1/M3 (or any machine) write to the same cloud store via API keys
+- **Multi-machine** — Desktop/Laptop (or any machine) write to the same cloud store via API keys
 - **Automatic population** — Claude Code Stop hook extracts episodes and facts from every session
 - **Multi-layer architecture** — Right memory type for each task
 - **Salience scoring** — Importance-based retention, not just recency
@@ -411,7 +411,7 @@ Two auth paths, enforced by middleware in the Worker:
 flowchart TD
     Req["Incoming Request"] --> Path{"Path?"}
 
-    Path --> |"/health, /api/init"| Public["Public<br/>(no auth)"]
+    Path --> |"/health"| Public["Public<br/>(no auth)"]
     Path --> |"/dashboard/*"| PINCheck{"reminisce-auth cookie?"}
     Path --> |"/api/*"| APICheck{"reminisce-auth cookie?"}
 
@@ -584,10 +584,10 @@ curl -X POST -H "X-API-Key: $KEY" -H "Content-Type: application/json" \
 
 #### `POST /api/init`
 
-Initialize D1 schema (run once on first deploy). **No auth required.**
+Initialize D1 schema (run once on first deploy). Requires API key authentication.
 
 ```bash
-curl -X POST https://your-worker.your-domain.com/api/init
+curl -X POST -H "X-API-Key: $KEY" https://your-worker.your-domain.com/api/init
 ```
 
 ### Read Endpoints
@@ -758,7 +758,7 @@ Get current authenticated tenant info.
 | Method | Path | Auth | Description |
 |--------|------|------|-------------|
 | `GET` | `/health` | No | Health check with feature flags |
-| `POST` | `/api/init` | No | Initialize D1 schema |
+| `POST` | `/api/init` | Yes | Initialize D1 schema |
 | `GET` | `/api/stats` | Yes | System statistics |
 | `GET` | `/api/memory/working` | Yes | Working memory (always empty) |
 | `GET` | `/api/memory/episodic` | Yes | Query episodic memories |
@@ -1314,13 +1314,7 @@ npx wrangler deploy      # Deploy to Cloudflare
 
 ### Data Migration
 
-To migrate local SQLite records to the cloud:
-
-```bash
-REMINISCE_API_KEY=your_key bun run scripts/migrate-to-cloud.ts
-```
-
-After migration, re-index Vectorize:
+To migrate local SQLite records to the cloud, write a script that reads from your local `~/.reminisce/memory.db` and posts to `POST /api/memory/episode` and `POST /api/memory/fact`. After migration, re-index Vectorize:
 
 ```bash
 curl -X POST -H "X-API-Key: $KEY" \
@@ -1429,4 +1423,4 @@ MIT
 
 ---
 
-Built with insights from cognitive science and neuroscience research on human memory systems. See [COGNITIVE_SCIENCE.md](./docs/COGNITIVE_SCIENCE.md) for the research foundations.
+Built with insights from cognitive science and neuroscience research on human memory systems.

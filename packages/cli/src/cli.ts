@@ -21,12 +21,12 @@ Commands:
 Examples:
   reminisce init                           # Create reminisce.db in current directory
   reminisce init --path ./data/memory.db   # Create at custom path
-  reminisce init --vector --dimensions 1536  # Enable vector search
+  reminisce init --vector --dimensions 768  # Enable vector search
 
 Run 'reminisce <command> --help' for more information on a command.
 `;
 
-const VERSION = '0.1.0';
+const VERSION = '0.2.0';
 
 async function main() {
   const args = process.argv.slice(2);
@@ -56,7 +56,7 @@ async function handleInit(args: string[]) {
   // Parse arguments
   let path = './reminisce.db';
   let enableVector = false;
-  let dimensions = 1536; // OpenAI default
+  let dimensions = 768; // EmbeddingGemma-300m default
   let machineId = 'default';
 
   for (let i = 0; i < args.length; i++) {
@@ -72,14 +72,14 @@ Usage:
 Options:
   --path, -p <path>       Database file path (default: ./reminisce.db)
   --vector, -v            Enable vector search (requires sqlite-vec)
-  --dimensions, -d <n>    Embedding dimensions (default: 1536)
+  --dimensions, -d <n>    Embedding dimensions (default: 768)
   --machine-id, -m <id>   Machine identifier (default: 'default')
   --help, -h              Show this help message
 
 Examples:
   reminisce init
   reminisce init --path ./data/memory.db
-  reminisce init --vector --dimensions 384
+  reminisce init --vector --dimensions 768
 `);
       return;
     }

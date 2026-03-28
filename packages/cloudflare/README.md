@@ -39,8 +39,10 @@ Edit `wrangler.toml` and fill in your `database_id`.
 
 ```bash
 wrangler deploy
-curl -X POST https://your-worker.workers.dev/api/init
+curl -X POST -H "X-API-Key: reminisce_your_secure_key_here" https://your-worker.workers.dev/api/init
 ```
+
+Note: Insert your tenant row (step 5) before running init, or use wrangler D1 to run the schema directly.
 
 ### 5. Create an API Key
 
@@ -99,7 +101,7 @@ wrangler secret put JWT_SECRET
 
 ### Authentication
 
-All endpoints (except `/health` and `/api/init`) require authentication.
+All endpoints (except `/health`) require authentication.
 
 **API Key:**
 ```bash

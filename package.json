@@ -10,13 +10,9 @@
     "test": "turbo test",
     "lint": "turbo lint",
     "dev": "turbo dev",
-    "publish:npm": "bun run scripts/publish-npm.ts",
-    "publish:npm:dry": "bun run scripts/publish-npm.ts --dry-run",
     "registry:start": "docker compose up -d",
     "registry:stop": "docker compose down",
-    "registry:logs": "docker compose logs -f",
-    "publish:local": "./scripts/publish-local.sh",
-    "unpublish:local": "./scripts/unpublish-local.sh"
+    "registry:logs": "docker compose logs -f"
   },
   "devDependencies": {
     "turbo": "^2.0.0",

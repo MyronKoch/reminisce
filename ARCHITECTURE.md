@@ -4,7 +4,7 @@
 
 This document describes the architecture of Reminisce, including what's currently implemented (MVP) and the design vision for future development.
 
-**See also:** [COGNITIVE_SCIENCE.md](./docs/COGNITIVE_SCIENCE.md) for the neuroscience research behind these design decisions.
+The design draws on neuroscience research into human memory systems including working memory capacity limits, hippocampal episodic encoding, and neocortical semantic consolidation.
 
 ---
 
@@ -878,7 +878,7 @@ All embeddings are 768 dimensions via EmbeddingGemma-300m. LM Studio is the only
 | `@reminisce/dashboard` | ✅ Complete | - | Web UI |
 | `@reminisce/cloudflare` | ✅ Complete | - | Cloudflare Workers deployment |
 
-**Total: 252 tests passing**
+**Total: 606 tests passing**
 
 ---
 
