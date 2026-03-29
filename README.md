@@ -963,6 +963,8 @@ Add an item to working memory. Items overflow to episodic memory when capacity (
 
 Search across working, episodic, and semantic memory layers. When `REMINISCE_VECTOR=true` and LM Studio is available, semantic search is augmented with vector similarity - the query text is embedded and matched against stored fact embeddings via sqlite-vec, then merged with LIKE results for better coverage. Falls back to LIKE-only if LM Studio is unavailable.
 
+Semantic results include a `relevance` field: vector cosine similarity (0-1) when vector search is active, or `0.1` as a low-confidence fallback for LIKE-only matches. Results are sorted by `relevance` descending.
+
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `text` | `string` | No | Text to search for (uses LIKE + vector similarity) |
