@@ -1128,7 +1128,7 @@ Stripped tags:
   <context-enforcement>...</context-enforcement>
   <past-context>...</past-context>
   <reminisce-patterns>...</reminisce-patterns>
-  <pai-status>...</pai-status>
+  <agent-status>...</agent-status>
 ```
 
 Without this, regex patterns would match against CLAUDE.md instructions and system-reminder injections, producing garbage like "HTML tags for basic content" extracted from the CLAUDE.md rule "Markdown > HTML."

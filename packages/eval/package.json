@@ -1,0 +1,19 @@
+{
+  "name": "@reminisce/eval",
+  "version": "0.2.0",
+  "private": true,
+  "description": "LongMemEval benchmark adapter for Reminisce",
+  "scripts": {
+    "bench": "bun run src/longmemeval.ts",
+    "bench:small": "bun run src/longmemeval.ts --limit 20",
+    "score": "bun run src/score.ts"
+  },
+  "dependencies": {
+    "@reminisce/core": "workspace:*",
+    "@reminisce/orchestrator": "workspace:*",
+    "@reminisce/episodic": "workspace:*",
+    "@reminisce/semantic": "workspace:*",
+    "@reminisce/consolidation": "workspace:*",
+    "@reminisce/working": "workspace:*"
+  }
+}

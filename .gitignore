@@ -13,6 +13,7 @@ coverage/
 # Cloudflare Worker
 packages/cloudflare/public/
 packages/cloudflare/.wrangler/
+packages/cloudflare/.dev.vars
 wrangler.toml
 
 # Local config (use .example files as templates)
