@@ -2,7 +2,9 @@
 
 > AI memory that thinks like a human brain
 
-Reminisce is a cognitive science-inspired memory architecture for AI systems. Instead of a single vector store, it implements distinct memory types that work together — just like human memory. It runs as a cloud-native service on Cloudflare (D1 + Vectorize + Workers AI) with local SQLite fallback, and is automatically populated by Claude Code session hooks.
+Reminisce is a cognitive science-inspired memory architecture for AI systems. Instead of a single vector store, it implements distinct memory types that work together -- just like human memory. It runs as a cloud-native service on Cloudflare (D1 + Vectorize + Workers AI) with local SQLite fallback, and is automatically populated by Claude Code session hooks.
+
+*In development since January 2026. Originally "MLMS" (Multi-Layer Memory System), rebranded to Reminisce on January 31, 2026.*
 
 ---
 
