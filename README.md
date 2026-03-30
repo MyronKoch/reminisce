@@ -6,6 +6,8 @@ Reminisce is a cognitive science-inspired memory architecture for AI systems. In
 
 *In development since January 2026. Originally "MLMS" (Multi-Layer Memory System), rebranded to Reminisce on January 31, 2026.*
 
+**Paper:** [Reminisce: A Cognitive Science-Inspired Memory Architecture for AI Agents](paper/reminisce.pdf) | [Benchmark Results (HuggingFace)](https://huggingface.co/datasets/myronkoch/reminisce-longmemeval-results)
+
 ---
 
 ## Table of Contents
