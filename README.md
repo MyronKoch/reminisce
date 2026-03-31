@@ -2,7 +2,7 @@
 
 > AI memory that thinks like a human brain
 
-> **Paper:** [Reminisce: A Cognitive Science-Inspired Memory Architecture for AI Agents](paper/reminisce.pdf) | [Benchmark Results (HuggingFace)](https://huggingface.co/datasets/myronkoch/reminisce-longmemeval-results)
+> **Read the Paper:** [Reminisce: A Cognitive Science-Inspired Memory Architecture for AI Agents](paper/reminisce.pdf) | [Benchmark Results (HuggingFace)](https://huggingface.co/datasets/myronkoch/reminisce-longmemeval-results)
 
 Reminisce is a cognitive science-inspired memory architecture for AI systems. Instead of a single vector store, it implements distinct memory types that work together -- just like human memory. It runs as a cloud-native service on Cloudflare (D1 + Vectorize + Workers AI) with local SQLite fallback, and is automatically populated by Claude Code session hooks.
 
